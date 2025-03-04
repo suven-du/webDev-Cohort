@@ -29,28 +29,17 @@ const carouselNav = document.getElementById("carouselNav");
 const autoPlayButton = document.getElementById("autoPlayButton");
 const timerDisplay = document.getElementById("timerDisplay");
 
-const indicator1 = document.createElement("div");
-indicator1.classList.add(`carousel-indicator`);
-const indicator2 = document.createElement("div");
-indicator2.classList.add(`carousel-indicator`);
-const indicator3 = document.createElement("div");
-indicator3.classList.add(`carousel-indicator`);
-const indicator4 = document.createElement("div");
-indicator4.classList.add(`carousel-indicator`);
-
-carouselNav.appendChild(indicator1);
-carouselNav.appendChild(indicator2);
-carouselNav.appendChild(indicator3);
-carouselNav.appendChild(indicator4);
-
+for(let i=0;i<4;i++){
+   const indicator1 = document.createElement("div");
+   indicator1.classList.add(`carousel-indicator`);
+   carouselNav.appendChild(indicator1);
+}
 
 let state = 0;
 
 carouselTrack.style.backgroundImage = `url(${images[state].url})`
 caption.textContent = `${images[state].caption}`;
 carouselNav.children[state].classList.add(`active`);
-
-
 
 carouselTrack.classList.add(`carousel-slide`);
 const navchildrenArray=Array.from(carouselNav.children);
@@ -98,31 +87,29 @@ navchildrenArray.forEach((child ,index)=>{
   })
 })
 //autoplay feature
-let id=null;
-let countdown=3;
-let countdownid=null;
+let intervalId=null;
+let countdown=4;
+let countdownId=null;
 autoPlayButton.addEventListener("click",function(){
-  if(id){
-    clearInterval(id);
-    c
-    id=null;
-
-    autoPlayButton.textContent="start Auto Plya"
+  if(intervalId){
+    clearInterval(intervalId);
+    clearInterval(countdownId)
+ intervalId=null;
+ countdownId=null;
+timerDisplay.textContent=''
+    autoPlayButton.textContent="start Auto Play"
   }else{
-   countdownid= setInterval(()=>{
-    timerDisplay.textContent=`Next page in${countdown}`
-    countdown<0?countdown=3:countdown--;
-     
-    },1000)
-   id= setInterval(()=>{  updateCarousel(state) 
-    }
-    ,3000)
-    
-    autoPlayButton.textContent="stop Auto Plya";
-    timerDisplay.classList.add('')
-
-  }
   
+   intervalId= setInterval(()=>{  updateCarousel(state) 
+    }
+    ,5000)
+    countdownId= setInterval(()=>{
+      timerDisplay.textContent=`Next page in${countdown}`
+      countdown<=0?countdown=4:countdown--;
+      },1000)
+    
+    autoPlayButton.textContent="stop Auto Play";
+  }
      
 })
 
