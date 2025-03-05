@@ -25,6 +25,10 @@ const menuItem=document.querySelectorAll(".menu-item");
      })
    })
 
+   panel.addEventListener("click", function (event) {
+    event.stopPropagation(); // Prevents closing when clicking inside
+});
+
     document.addEventListener("click",function(){
           if(panel.classList.contains("active")){
             panel.classList.remove("active")
@@ -33,7 +37,7 @@ const menuItem=document.querySelectorAll(".menu-item");
     })
 
 
-    //anaother way to do
+    //anaother BETTER  way to do
 
     // document.addEventListener("click",function(event){
     //     if (!panel.contains(event.target) && !toggleBtn.contains(event.target)) {
