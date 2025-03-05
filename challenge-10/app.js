@@ -20,3 +20,26 @@ const images = [
     caption: 'Urban City Skyline',
   },
 ];
+const stats=document.querySelector(".stats")
+const moves=document.getElementById("moves")
+const time=document.getElementById("time");
+const gameContainer=document.querySelector(".game-container");
+ 
+for(let i=0; i<16;i++){
+   const card=document.createElement("div");
+   card.textContent="🐶";
+    card.classList.add("card");
+    c.classList.add("card-front");
+
+    gameContainer.appendChild(card);
+}
+const cards=document.querySelectorAll(".card");
+function restartGame(e){
+      
+      cards.forEach((card)=>{
+           card.addEventListener("click",function(){
+                card.classList.toggle("card-back");
+           })
+      })
+}
+
