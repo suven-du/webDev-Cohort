@@ -8,20 +8,21 @@ function addToCart (name,p){
     let price=Math.round(p);
     let quantity = 1;
         let total = price*quantity;
-        totalAmount += total
     const sameProduct=Array.from(cart_items.children).find((ci)=>ci.classList.contains(name));
-    if(sameProduct!==undefined){
+    if(sameProduct){
         let spQuantity=sameProduct.querySelector(".quantity");
-       let quantity=parseInt(spQuantity.textContent,10);
+        quantity=parseInt(spQuantity.textContent,10);
            quantity++;
        spQuantity.textContent=quantity;
        let spTotal=sameProduct.querySelector(".total");
-       let total=parseInt(spTotal.textContent,10);
+        total=parseInt(spTotal.textContent,10);
        total=price*quantity;
        spTotal.textContent=total;
+       //it can be totalAmount = totalAmount - prevTotal + newTotal; but for me
        totalAmount+=price
         cart_total.textContent = `Total: $${totalAmount}`
     }else{
+        totalAmount += total
         
         const cart_item = document.createElement("div");
         cart_item.classList.add("cart-item");
@@ -93,12 +94,13 @@ function addToCart (name,p){
         })
     
         remove.addEventListener("click",removeElement)
-    
+        
         function removeElement(e){
             e.target.parentElement.parentElement.remove();
+//it can be let itemTotal = parseInt(e.target.parentElement.querySelector(".total").textContent, 10);totalAmount -= itemTotal;
+
             totalAmount = totalAmount - total;
             cart_total.textContent = `Total: $${totalAmount}`
-    
         }
 
     }
